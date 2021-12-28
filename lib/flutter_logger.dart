@@ -23,7 +23,6 @@ class Logger {
     return _isShowFile;
   }
 
-
   /// 日志中是否含 点击 定位到文件的打印位置
   static bool _isShowNavigation = true;
 
