@@ -53,8 +53,7 @@ class _ConsoleWidgetState extends State<ConsoleWidget> {
     _textController = TextEditingController();
 
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      RenderBox renderObject =
-          _globalKey.currentContext?.findRenderObject() as RenderBox;
+      RenderBox renderObject = _globalKey.currentContext?.findRenderObject() as RenderBox;
       _currendDy = renderObject.localToGlobal(Offset.zero).dy;
     });
     super.initState();
@@ -86,8 +85,7 @@ class _ConsoleWidgetState extends State<ConsoleWidget> {
             child: _buildDragView(constraints),
             // _isLarge 的状态下，不准拖动
             feedback: _isLarge ? Container() : _buildDragView(constraints),
-            childWhenDragging:
-                _isLarge ? _buildDragView(constraints) : Container(),
+            childWhenDragging: _isLarge ? _buildDragView(constraints) : Container(),
             onDragEnd: (DraggableDetails details) {
               _calculatePosition(details);
             },
@@ -118,10 +116,8 @@ class _ConsoleWidgetState extends State<ConsoleWidget> {
   Widget _buildDragView(BoxConstraints constraints) {
     return Container(
       width: constraints.maxWidth,
-      key:_globalForDrag,
-      height: _isLarge
-          ? constraints.maxHeight - 100 + _mangerSize
-          : 200 + _mangerSize,
+      key: _globalForDrag,
+      height: _isLarge ? constraints.maxHeight - 100 + _mangerSize : 200 + _mangerSize,
       // 因为滑动的时候 不知道为啥 说  IconButton 需要 Material，暂时不知道，所以加了 Scaffold
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -158,8 +154,7 @@ class _ConsoleWidgetState extends State<ConsoleWidget> {
                   ),
                   Text(
                     _levelName,
-                    style:
-                        TextStyle(color: ConsoleUtil.getLevelColor(_logLevel)),
+                    style: TextStyle(color: ConsoleUtil.getLevelColor(_logLevel)),
                   ),
                   const SizedBox(
                     width: 5,
@@ -169,8 +164,7 @@ class _ConsoleWidgetState extends State<ConsoleWidget> {
                   ),
                   IconButton(
                     onPressed: _changeSize,
-                    icon: Icon(
-                        _isLarge ? Icons.crop : Icons.aspect_ratio_outlined),
+                    icon: Icon(_isLarge ? Icons.crop : Icons.aspect_ratio_outlined),
                   ),
                 ],
               ),
@@ -181,16 +175,13 @@ class _ConsoleWidgetState extends State<ConsoleWidget> {
     );
   }
 
-
   Widget _buildLogWidget(LogModeValue model) {
     List<LogMode> modeList = model.logModeList;
     List<LogMode> fiterList = [];
     for (int i = modeList.length - 1; i >= 0; i--) {
       LogMode logMode = modeList[i];
       // 过滤日志
-      if ((_logLevel == logMode.level || _logLevel == _levelDefault) &&
-          logMode.logMessage != null &&
-          logMode.logMessage!.contains(_filterStr)) {
+      if ((_logLevel == logMode.level || _logLevel == _levelDefault) && logMode.logMessage != null && logMode.logMessage!.contains(_filterStr)) {
         fiterList.add(logMode);
       }
     }
@@ -206,13 +197,10 @@ class _ConsoleWidgetState extends State<ConsoleWidget> {
           shrinkWrap: true,
           itemBuilder: (context, index) {
             LogMode logMode = fiterList[index];
-            TextStyle _logStyle = TextStyle(
-                color: ConsoleUtil.getLevelColor(logMode.level),
-                fontSize: 15,
-                decoration: TextDecoration.none,
-                fontWeight: FontWeight.w400);
+            TextStyle _logStyle =
+                TextStyle(color: ConsoleUtil.getLevelColor(logMode.level), fontSize: 15, decoration: TextDecoration.none, fontWeight: FontWeight.w400);
             String log = _getLog(logMode);
-            return Text(log, style: _logStyle);
+            return SelectableText(log, style: _logStyle);
           },
           itemCount: fiterList.length,
         ),
@@ -399,22 +387,20 @@ class _ConsoleWidgetState extends State<ConsoleWidget> {
 
   /// 样式
   String _getLog(LogMode logMode) {
-    String log = logMode.logMessage??"";
+    String log = logMode.logMessage ?? "";
     switch (_logStyle % 3) {
       case _logAll:
-        log = logMode.logMessage??"";
+        log = logMode.logMessage ?? "";
         break;
       case _logOnlyFile:
-        log = log.replaceAll(logMode.fileName??"","");
+        log = log.replaceAll(logMode.fileName ?? "", "");
         break;
       case _logOnlyTime:
-        log = log.replaceAll(logMode.time??"","");
+        log = log.replaceAll(logMode.time ?? "", "");
         break;
     }
 
     // print(log);
     return log;
   }
-
-
 }
