@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_easylogger/log_mode.dart';
+import 'package:flutter_bug_logger/log_mode.dart';
 
 import 'flutter_logger.dart';
 import 'printer.dart';
@@ -21,24 +21,20 @@ class LoggerPrinter extends Printer {
   static const String _topRight = '┐';
   static const String _bottomRight = '┘';
   static const String _verticalLine = '│';
-  static const String _divider =
-      "────────────────────────────────────────────────────────";
+  static const String _divider = "────────────────────────────────────────────────────────";
 
   /// 当需要点击调转到某个文件的时候添加
-  static const String _singleDivider =
-      "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄";
+  static const String _singleDivider = "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄";
 
   //  暂时发现 在 macOs 上 ，应用内，上面的几个都 识别不了
   static const String _verticalLineMacOs = '| ';
-  static const String _dividerMacOs =
-      "——————————————————————————————————————————————————————";
+  static const String _dividerMacOs = "——————————————————————————————————————————————————————";
 
   //  暂时发现 在 ios 上 ，应用内 _verticalLine 有空格，所以替换成这个
   static const String _verticalLineIos = '｜';
 
   static const String _topBorder = "$_topLeft$_divider$_divider$_topRight";
-  static const String _bottomBorder =
-      "$_bottomLeft$_divider$_divider$_bottomRight";
+  static const String _bottomBorder = "$_bottomLeft$_divider$_divider$_bottomRight";
 
   @override
   void v(Object? object, {String? tag}) {
@@ -84,8 +80,7 @@ class LoggerPrinter extends Printer {
     String fileName = LoggerUtil.getFileInfo();
     DateTime dateTime = DateTime.now();
     String time = LoggerUtil.formatDate(dateTime);
-    String prefix =
-        "${getLevelFirst(level)}${Logger.isShowTime ? dateTime : ""} ${Logger.isShowFile ? fileName : ""} : ${tag ?? ""}";
+    String prefix = "${getLevelFirst(level)}${Logger.isShowTime ? dateTime : ""} ${Logger.isShowFile ? fileName : ""} : ${tag ?? ""}";
     String prefixForPhone = "$time $fileName : ${tag ?? ""}";
 
     if (defaultTargetPlatform == TargetPlatform.iOS) {
@@ -103,8 +98,7 @@ class LoggerPrinter extends Printer {
       print(pen.call("$prefix $_verticalLine$_singleDivider$_singleDivider"));
     }
 
-    if (defaultTargetPlatform == TargetPlatform.macOS ||
-        defaultTargetPlatform == TargetPlatform.windows) {
+    if (defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.windows) {
       logMessage.write("$prefixForPhone $_dividerMacOs\n");
     } else {
       logMessage.write("$prefixForPhone $_topBorder\n");
@@ -118,8 +112,7 @@ class LoggerPrinter extends Printer {
       if (defaultTargetPlatform == TargetPlatform.iOS) {
         //主要是运行在ios手机上的 日志， 因为运行在ios上会有不等宽的字符，随意加宽一个空格，
         logMessage.write("$prefixForPhone $_verticalLineIos $element\n");
-      } else if (defaultTargetPlatform == TargetPlatform.macOS ||
-          defaultTargetPlatform == TargetPlatform.windows) {
+      } else if (defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.windows) {
         logMessage.write("$prefixForPhone $_verticalLineMacOs $element\n");
       } else {
         logMessage.write("$prefixForPhone $_verticalLine $element\n");
@@ -129,8 +122,7 @@ class LoggerPrinter extends Printer {
     // 绘制结束时下边的分割线
     print(pen.call("$prefix $_bottomBorder"));
 
-    if (defaultTargetPlatform == TargetPlatform.macOS ||
-        defaultTargetPlatform == TargetPlatform.windows) {
+    if (defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.windows) {
       logMessage.write("$prefixForPhone $_dividerMacOs\n");
     } else {
       logMessage.write("$prefixForPhone $_bottomBorder");
@@ -140,6 +132,7 @@ class LoggerPrinter extends Printer {
       level: level,
       fileName: fileName,
       time: time,
+      originalMessage: message,
       logMessage: logMessage.toString(),
     );
     Logger.notifier.addLog(mode);

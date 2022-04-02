@@ -1,4 +1,4 @@
-Language: English | [中文简体](https://github.com/niezhiyang/flutter_logger/blob/master/README-ZH.md)
+Language: English | (https://github.com/niezhiyang/flutter_logger/blob/master/README-ZH.md)
 
 # flutter_logger
 

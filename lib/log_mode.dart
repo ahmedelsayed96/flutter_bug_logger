@@ -6,11 +6,18 @@ class LogModeValue {
 
 class LogMode {
   String? logMessage;
+  String? originalMessage;
   int? level;
   String? time;
   String? fileName;
 
-  LogMode({this.logMessage, this.level, this.time, this.fileName});
+  LogMode({
+    this.logMessage,
+    this.level,
+    this.time,
+    this.fileName,
+    this.originalMessage,
+  });
 }
 
 class LogValueNotifier extends ValueNotifier<LogModeValue> {

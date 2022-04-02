@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easylogger/console_overlay.dart';
-import 'package:flutter_easylogger/console_widget.dart';
-import 'package:flutter_easylogger/flutter_logger.dart';
+import 'package:flutter_bug_logger/console_overlay.dart';
+import 'package:flutter_bug_logger/flutter_logger.dart';
 
 void main() {
   Logger.init(
     true,
-    isShowFile: true,
-    isShowTime: true,
+    isShowFile: false,
+    isShowTime: false,
     isShowNavigation: true,
     levelVerbose: 247,
     levelDebug: 26,
@@ -27,16 +26,13 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   void onPressed() {
-    Logger.v("hello world");
-    Logger.d("hello world");
-    Logger.i("hello world");
-    Logger.w("hello world");
-    Logger.e("hello world", tag: "TAG");
-    var json =
-        "{\"name\":\"tom\",\"age\":\"38\",\"son\":{\"name\":\"jerry\",\"age\":\"18\",\"grandson\":{\"name\":\"lily\",\"age\":\"8\"}}}";
+    Logger.v("hello world\nsecond ");
+    Logger.d("hello world\nsecond time");
+    Logger.i("hello world\nsecond time");
+    Logger.w("hello world\nsecond time");
+    Logger.e("hello world\nsecond time", tag: "TAG");
+    var json = "{\"name\":\"tom\",\"age\":\"38\",\"son\":{\"name\":\"jerry\",\"age\":\"18\",\"grandson\":{\"name\":\"lily\",\"age\":\"8\"}}}";
     Logger.json(json);
-
-
   }
 
   @override
@@ -82,4 +78,3 @@ class _DemoState extends State<Demo> {
     return Container();
   }
 }
-

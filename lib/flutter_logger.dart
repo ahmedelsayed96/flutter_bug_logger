@@ -132,7 +132,6 @@ class Logger {
     _printer.e(object, tag: tag);
   }
 
-  /// 打印json
   static void json(String? json, {String? tag}) {
     _printer.json(json, tag: tag);
   }

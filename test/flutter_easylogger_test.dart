@@ -1,4 +1,4 @@
-import 'package:flutter_easylogger/flutter_logger.dart';
+import 'package:flutter_bug_logger/flutter_logger.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -19,27 +19,23 @@ void main() {
 
     print(nowTime);
     // print("$hour - $minute - $second");
-    print(DateFormat.format(DateTime.now(),haveDay: true));
+    print(DateFormat.format(DateTime.now(), haveDay: true));
     print(DateFormat.format(DateTime.now()));
     // print( DateTime.parse("yyyy-MM-dd HH:mm:ss"));
   });
-
-
 }
 
-class DateFormat{
-  
-  static String format(DateTime date,{bool haveDay = false}) {
+class DateFormat {
+  static String format(DateTime date, {bool haveDay = false}) {
     StringBuffer buffer = StringBuffer();
-    if(haveDay){
-      var day =  date.toString().split(" ")[0];
+    if (haveDay) {
+      var day = date.toString().split(" ")[0];
       buffer.write(day);
       buffer.write(" ");
     }
-   var time =  date.toString().split(" ")[1].split(".")[0];
+    var time = date.toString().split(" ")[1].split(".")[0];
 
     buffer.write(time);
     return buffer.toString();
   }
-
 }

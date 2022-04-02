@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bug_logger/log_text.dart';
 
 import 'console_widget.dart';
 import 'flutter_logger.dart';
@@ -46,9 +47,7 @@ class ConsoleOverlayWidget extends StatefulWidget {
 
 class _ConsoleOverlayWidgetState extends State<ConsoleOverlayWidget> {
   ValueNotifier<FilterMenu> _menuValue = ValueNotifier(FilterMenu(10, true));
-  static const int _logAll = 0;
-  static const int _logOnlyFile = 1;
-  static const int _logOnlyTime = 2;
+
   static const double _logHeigh = 210;
   final SizedBox _divider = const SizedBox(
     height: 1,
@@ -328,14 +327,20 @@ class _ConsoleOverlayWidgetState extends State<ConsoleOverlayWidget> {
           shrinkWrap: true,
           itemBuilder: (context, index) {
             LogMode logMode = fiterList[index];
-            TextStyle _logStyle =
-                TextStyle(color: ConsoleUtil.getLevelColor(logMode.level), fontSize: 15, decoration: TextDecoration.none, fontWeight: FontWeight.w400);
-            String log = _getLog(logMode);
-            return Text(log, style: _logStyle);
+
+            return _buildTextWidget(logMode);
+            // return Text(log, style: _logStyle);
           },
           itemCount: fiterList.length,
         ),
       ),
+    );
+  }
+
+  Widget _buildTextWidget(LogMode logMode) {
+    return LogText(
+      logMode: logMode,
+      logStyle: _logStyle,
     );
   }
 
@@ -482,28 +487,8 @@ class _ConsoleOverlayWidgetState extends State<ConsoleOverlayWidget> {
     });
   }
 
-  /// 关闭软键盘，并且取消焦点
   void _closeKeyBoard() {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
     FocusManager.instance.primaryFocus?.unfocus();
-  }
-
-  /// 样式
-  String _getLog(LogMode logMode) {
-    String log = logMode.logMessage ?? "";
-    switch (_logStyle % 3) {
-      case _logAll:
-        log = logMode.logMessage ?? "";
-        break;
-      case _logOnlyFile:
-        log = log.replaceAll(logMode.fileName ?? "", "");
-        break;
-      case _logOnlyTime:
-        log = log.replaceAll(logMode.time ?? "", "");
-        break;
-    }
-
-    // print(log);
-    return log;
   }
 }

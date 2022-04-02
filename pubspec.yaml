@@ -1,7 +1,7 @@
-name: flutter_easylogger
+name: flutter_bug_logger
 description: Simple, pretty and powerful logger for flutter.
-version: 2.3.4
-homepage: https://github.com/niezhiyang/flutter_logger
+version:  1.0.0
+homepage: https://github.com/ahmedelsayed96/flutter_logger
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

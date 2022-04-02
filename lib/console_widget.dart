@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_easylogger/logger_printer.dart';
+import 'package:flutter_bug_logger/logger_printer.dart';
 
 import 'flutter_logger.dart';
 import 'src/console_util.dart';
