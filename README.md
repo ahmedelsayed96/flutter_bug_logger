@@ -1,6 +1,6 @@
 # flutter_bug_logger
 
-- Simple, pretty and powerful logger for flutter，It has the log level, file name and line number, and can customize the color of the log level，It was inspired by [logger](https://github.com/orhanobut/logger)
+- Simple, pretty and powerful logger for flutter，It has the log level, file name and line number, and can customize the color of the log level，It was inspired by [logger](https://github.com/niezhiyang/flutter_logger)
 ，Color not supported on ios。
 - It can be printed on the phone, and logs can be filtered
 ## Download
@@ -70,6 +70,8 @@ You can change the color of level, and the value is in the range of 0-255. Pleas
 Logs can be printed on the phone or filtered by log level or keyword
 
 <img src="https://raw.githubusercontent.com/ahmedelsayed96/flutter_bug_logger/master/art/logger_phone.gif" width="30%">
+<img src="https://raw.githubusercontent.com/ahmedelsayed96/flutter_bug_logger/master/art/phone.png" width="30%">
+
 
 ```dart
 // add Overlay
