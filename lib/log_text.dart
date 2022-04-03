@@ -47,7 +47,7 @@ class _LogTextState extends State<LogText> {
         width: 1,
       )),
       child: SelectableText(
-        log,
+        '${widget.logMode.time}\n\n' + log,
         style: _logStyle,
         onTap: _handleTextClick,
       ),
