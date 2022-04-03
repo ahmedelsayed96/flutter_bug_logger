@@ -6,7 +6,7 @@
 ## Download
 
 ```
-flutter_easylogger: ^{LAST_VERSION}
+flutter_bug_logger: ^{LAST_VERSION}
 ```
 
 ## Usage
