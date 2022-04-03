@@ -106,7 +106,7 @@ class _ConsoleOverlayWidgetState extends State<ConsoleOverlayWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return _buildDraggable();
+    return SafeArea(child: _buildDraggable());
   }
 
   Widget _buildDraggable() {
@@ -195,7 +195,7 @@ class _ConsoleOverlayWidgetState extends State<ConsoleOverlayWidget> {
                     children: [
                       Container(
                         padding: EdgeInsets.all(4),
-                        height: _isLarge ? constraints.maxHeight - 50 : _logHeigh,
+                        height: _isLarge ? constraints.maxHeight - 70 : _logHeigh,
                         decoration: const BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.only(
